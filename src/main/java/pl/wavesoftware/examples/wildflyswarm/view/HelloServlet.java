@@ -1,8 +1,10 @@
 package pl.wavesoftware.examples.wildflyswarm.view;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import pl.wavesoftware.examples.wildflyswarm.service.HelloService;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +18,20 @@ import java.io.IOException;
  * @since 04.03.16
  */
 @WebServlet("/")
+@Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class HelloServlet extends HttpServlet {
 
     private final HelloService service;
 
+    @PostConstruct
+    public void postConstruct() {
+        log.info("Staring HelloServlet...");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.info("A request for: " + request.getRequestURI());
         response.getWriter().append(service.makeHello());
     }
 }
