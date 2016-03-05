@@ -5,7 +5,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.junit.ClassRule;
 import org.junit.Test;
-import pl.wavesoftware.examples.wildflyswarm.testing.JavaMinusJarRunner;
+import pl.wavesoftware.wildflyswarm.testing.JavaMinusJarRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,4 +1,4 @@
-package pl.wavesoftware.examples.wildflyswarm.testing;
+package pl.wavesoftware.wildflyswarm.testing;
 
 import com.google.common.collect.ImmutableList;
 import lombok.AccessLevel;
@@ -38,6 +38,7 @@ public class JavaMinusJarRunner implements TestRule {
     private final String classifier;
     private final Integer port;
     private final List<Map.Entry<String, String>> javaOpts;
+    private final boolean inheritIO;
     private Path artifact;
     private Process process;
     private File workingDirectory;
@@ -78,11 +79,16 @@ public class JavaMinusJarRunner implements TestRule {
     }
 
     private void before() throws IOException {
-        String[] command = buildCommand();
+        List<String> command = buildCommand();
+        log.info(String.format(
+            "Command to be executed: \"%s\"", command.stream().collect(Collectors.joining(" "))
+        ));
         ProcessBuilder pb = new ProcessBuilder(command);
         pb.directory(workingDirectory);
         pb.redirectErrorStream(true);
-        pb.inheritIO();
+        if (inheritIO) {
+            pb.inheritIO();
+        }
         process = pb.start();
         log.info(String.format("Starting \"java -jar\" server, waiting for port: %d to became active...", port));
         boolean ok = waitForPortToBecomeAvialable(process, port, DEFAULT_MAX_SECONDS);
@@ -98,7 +104,7 @@ public class JavaMinusJarRunner implements TestRule {
         } catch (InterruptedException e) {
             log.info("Waited 4s " + e.getLocalizedMessage(), e);
         }
-        log.info("All looks deployed and ready for tests!");
+        log.info("All looks ready, running tests...");
     }
 
     private static boolean waitForPortToBecomeAvialable(Process process, int port, int maxSeconds) {
@@ -115,7 +121,7 @@ public class JavaMinusJarRunner implements TestRule {
         return false;
     }
 
-    private String[] buildCommand() {
+    private List<String> buildCommand() {
         List<String> command = new ArrayList<>();
         command.add("java");
         for (Map.Entry<String, String> entry : javaOpts) {
@@ -123,12 +129,11 @@ public class JavaMinusJarRunner implements TestRule {
         }
         command.add("-jar");
         command.add(artifact.toAbsolutePath().toString());
-        log.info(String.format("Command to be executed: %s", command.stream().collect(Collectors.joining(" "))));
-        return command.toArray(new String[command.size()]);
+        return command;
     }
 
     private void after() {
-        log.info("Stopping \"java -jar\" server.");
+        log.info("Testing completed. Stopping \"java -jar\" server.");
         process.destroy();
     }
 
@@ -143,6 +148,7 @@ public class JavaMinusJarRunner implements TestRule {
         private List<Map.Entry<String, String>> javaOpts = new ArrayList<>();
         private String portJavaOption;
         private Integer port;
+        private boolean inheritIO = false;
 
         public JavaMinusJarBuilder withPackaging(String packaging) {
             this.packaging = packaging;
@@ -170,6 +176,15 @@ public class JavaMinusJarRunner implements TestRule {
             return this;
         }
 
+        public JavaMinusJarBuilder inheritIO() {
+            return inheritIO(true);
+        }
+
+        public JavaMinusJarBuilder inheritIO(boolean inheritIO) {
+            this.inheritIO = inheritIO;
+            return this;
+        }
+
         public JavaMinusJarRunner build() {
             if (port == null) {
                 port = findNotBindedPort();
@@ -178,7 +193,8 @@ public class JavaMinusJarRunner implements TestRule {
                 withJavaOption(portJavaOption, port.toString());
             }
             return new JavaMinusJarRunner(
-                packaging, classifier, port, ImmutableList.copyOf(javaOpts)
+                packaging, classifier, port, ImmutableList.copyOf(javaOpts),
+                inheritIO
             );
         }
     }
