@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.wavesoftware.examples.wildflyswarm.domain.User;
-import pl.wavesoftware.examples.wildflyswarm.service.AbstractHelloService;
 import pl.wavesoftware.examples.wildflyswarm.service.api.UserService;
 
 import java.util.Collection;
@@ -34,7 +33,7 @@ public class AbstractHelloServiceTest {
     @Test
     public void testMakeHello() throws Exception {
         // given
-        when(userService.fetchActiveUser()).thenReturn(USERS);
+        when(userService.fetchActiveUsers()).thenReturn(USERS);
 
         // when
         String hello = helloService.makeHello();
@@ -47,7 +46,7 @@ public class AbstractHelloServiceTest {
     @Test
     public void testMakeHello_toEmpty() throws Exception {
         // given
-        when(userService.fetchActiveUser()).thenReturn(ImmutableSet.<User>of());
+        when(userService.fetchActiveUsers()).thenReturn(ImmutableSet.<User>of());
 
         // when
         String hello = helloService.makeHello();
@@ -64,8 +63,8 @@ public class AbstractHelloServiceTest {
         }
 
         @Override
-        protected String helloMessage() {
-            return "Hello";
+        protected String helloTemplate() {
+            return "Hello %s!";
         }
     }
 }

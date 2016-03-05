@@ -10,8 +10,8 @@ import java.util.Collection;
  */
 public interface UserService {
     /**
-     * Retrives a collection of aactive users
+     * Retrieves a collection of active users
      * @return a collection with only active users
      */
-    Collection<User> fetchActiveUser();
+    Collection<User> fetchActiveUsers();
 }

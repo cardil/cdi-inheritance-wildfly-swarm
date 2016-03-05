@@ -18,23 +18,21 @@ public abstract class AbstractHelloService implements HelloService {
 
     private final UserService userService;
 
-    protected abstract String helloMessage();
+    protected abstract String helloTemplate();
 
     @Override
     public String makeHello() {
-        Collection<User> users = userService.fetchActiveUser();
-        StringBuilder sb = new StringBuilder();
-        sb.append(helloMessage()).append(" ");
+        Collection<User> users = userService.fetchActiveUsers();
         Optional<String> result = users.stream()
                 .map(AbstractHelloService::presentUser)
                 .reduce(AbstractHelloService::join);
+        String subject;
         if (result.isPresent()) {
-            sb.append(result.get());
+            subject = result.get();
         } else {
-            sb.append("to no one");
+            subject = "to no one";
         }
-        sb.append("!");
-        return sb.toString();
+        return String.format(helloTemplate(), subject);
     }
 
     private static String presentUser(User user) {

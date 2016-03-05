@@ -16,7 +16,7 @@ public class DefaultUserService implements UserService {
     private final static User ARNOLD = new User("Arnold", "Schwarzenegger");
 
     @Override
-    public Collection<User> fetchActiveUser() {
+    public Collection<User> fetchActiveUsers() {
         return ImmutableList.of(DOLPH, ARNOLD);
     }
 }

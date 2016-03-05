@@ -22,7 +22,7 @@ public class HelloServletIT {
     public void testGetRoot() throws UnirestException {
         // given
         String address = String.format("http://localhost:%d/", gasper.getPort());
-        String expectedMessage = "Hello :P Dolph Lundgren, Arnold Schwarzenegger!";
+        String expectedMessage = "Hello Dolph Lundgren, Arnold Schwarzenegger :P";
 
         // when
         HttpResponse<String> response = Unirest.get(address).asString();

@@ -22,10 +22,10 @@ public class FunnyHelloServiceTest {
     @Test
     public void testHelloMessage() throws Exception {
         // when
-        String message = helloService.helloMessage();
+        String template = helloService.helloTemplate();
 
         // then
-        assertThat(message).isEqualTo("Hello :P");
+        assertThat(template).isEqualTo("Hello %s :P");
     }
 
 

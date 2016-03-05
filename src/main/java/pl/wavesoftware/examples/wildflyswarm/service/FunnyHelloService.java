@@ -16,7 +16,7 @@ public class FunnyHelloService extends AbstractHelloService {
     }
 
     @Override
-    protected String helloMessage() {
-        return "Hello :P";
+    protected String helloTemplate() {
+        return "Hello %s :P";
     }
 }
