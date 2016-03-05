@@ -1,5 +1,7 @@
 package pl.wavesoftware.examples.wildflyswarm.service.impl;
 
+import pl.wavesoftware.examples.wildflyswarm.service.UserService;
+
 import javax.inject.Inject;
 
 /**
@@ -9,7 +11,7 @@ import javax.inject.Inject;
 public class FunnyHelloService extends AbstractHelloService {
 
     @Inject
-    public FunnyHelloService(UserServiceImpl userService) {
+    public FunnyHelloService(UserService userService) {
         super(userService);
     }
 
