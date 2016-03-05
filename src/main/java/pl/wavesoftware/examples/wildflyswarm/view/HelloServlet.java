@@ -32,6 +32,8 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("A request for: " + request.getRequestURI());
-        response.getWriter().append(service.makeHello());
+        String hello = service.makeHello();
+        log.info(String.format("Hello message: \"%s\"", hello));
+        response.getWriter().append(hello);
     }
 }
