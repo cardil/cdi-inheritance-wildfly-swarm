@@ -1,4 +1,4 @@
-package pl.wavesoftware.examples.wildflyswarm.service;
+package pl.wavesoftware.examples.wildflyswarm.service.api;
 
 import pl.wavesoftware.examples.wildflyswarm.domain.User;
 

@@ -1,4 +1,4 @@
-package pl.wavesoftware.examples.wildflyswarm.service;
+package pl.wavesoftware.examples.wildflyswarm.service.api;
 
 /**
  * @author Krzysztof Suszynski <krzysztof.suszynski@coi.gov.pl>

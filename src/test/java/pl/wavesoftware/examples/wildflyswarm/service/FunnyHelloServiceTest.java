@@ -1,11 +1,11 @@
-package pl.wavesoftware.examples.wildflyswarm.service.impl;
+package pl.wavesoftware.examples.wildflyswarm.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import pl.wavesoftware.examples.wildflyswarm.service.UserService;
+import pl.wavesoftware.examples.wildflyswarm.service.api.UserService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,7 +25,7 @@ public class FunnyHelloServiceTest {
         String message = helloService.helloMessage();
 
         // then
-        assertThat(message).isEqualTo("Funny hello");
+        assertThat(message).isEqualTo("Hello :P");
     }
 
 

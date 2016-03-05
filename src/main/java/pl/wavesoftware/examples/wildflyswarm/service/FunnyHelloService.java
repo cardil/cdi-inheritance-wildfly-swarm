@@ -1,6 +1,6 @@
-package pl.wavesoftware.examples.wildflyswarm.service.impl;
+package pl.wavesoftware.examples.wildflyswarm.service;
 
-import pl.wavesoftware.examples.wildflyswarm.service.UserService;
+import pl.wavesoftware.examples.wildflyswarm.service.api.UserService;
 
 import javax.inject.Inject;
 
@@ -17,6 +17,6 @@ public class FunnyHelloService extends AbstractHelloService {
 
     @Override
     protected String helloMessage() {
-        return "Funny hello";
+        return "Hello :P";
     }
 }

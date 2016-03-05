@@ -5,7 +5,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.junit.ClassRule;
 import org.junit.Test;
-import pl.wavesoftware.wildflyswarm.testing.JavaMinusJarRunner;
+import pl.wavesoftware.gasper.Gasper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,17 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HelloServletIT {
 
     @ClassRule
-    public static JavaMinusJarRunner runner = JavaMinusJarRunner.builder()
-        .withPackaging("jar")
-        .withClassifier("swarm")
-        .withPortJavaOption(JavaMinusJarRunner.WILDFLY_SWARM)
-        .build();
+    public static Gasper gasper = Gasper.defaultForWildflySwarm().create();
 
     @Test
     public void testGetRoot() throws UnirestException {
         // given
-        String address = String.format("http://localhost:%d/", runner.getPort());
-        String expectedMessage = "Funny hello Dolph Lundgren, Arnold Schwarzenegger!";
+        String address = String.format("http://localhost:%d/", gasper.getPort());
+        String expectedMessage = "Hello :P Dolph Lundgren, Arnold Schwarzenegger!";
 
         // when
         HttpResponse<String> response = Unirest.get(address).asString();

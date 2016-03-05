@@ -1,9 +1,9 @@
-package pl.wavesoftware.examples.wildflyswarm.service.impl;
+package pl.wavesoftware.examples.wildflyswarm.service;
 
 import lombok.RequiredArgsConstructor;
 import pl.wavesoftware.examples.wildflyswarm.domain.User;
-import pl.wavesoftware.examples.wildflyswarm.service.HelloService;
-import pl.wavesoftware.examples.wildflyswarm.service.UserService;
+import pl.wavesoftware.examples.wildflyswarm.service.api.HelloService;
+import pl.wavesoftware.examples.wildflyswarm.service.api.UserService;
 
 import javax.inject.Inject;
 import java.util.Collection;

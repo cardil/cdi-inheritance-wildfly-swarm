@@ -1,4 +1,4 @@
-package pl.wavesoftware.examples.wildflyswarm.service.impl;
+package pl.wavesoftware.examples.wildflyswarm.service;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
@@ -7,7 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.wavesoftware.examples.wildflyswarm.domain.User;
-import pl.wavesoftware.examples.wildflyswarm.service.UserService;
+import pl.wavesoftware.examples.wildflyswarm.service.AbstractHelloService;
+import pl.wavesoftware.examples.wildflyswarm.service.api.UserService;
 
 import java.util.Collection;
 

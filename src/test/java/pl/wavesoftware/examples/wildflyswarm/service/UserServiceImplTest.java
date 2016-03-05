@@ -1,8 +1,9 @@
-package pl.wavesoftware.examples.wildflyswarm.service.impl;
+package pl.wavesoftware.examples.wildflyswarm.service;
 
 import org.junit.Before;
 import org.junit.Test;
 import pl.wavesoftware.examples.wildflyswarm.domain.User;
+import pl.wavesoftware.examples.wildflyswarm.service.DefaultUserService;
 
 import java.util.Collection;
 
@@ -14,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class UserServiceImplTest {
 
-    private UserServiceImpl userService;
+    private DefaultUserService userService;
 
     @Before
     public void before() {
-        userService = new UserServiceImpl();
+        userService = new DefaultUserService();
     }
 
     @Test

@@ -2,7 +2,7 @@ package pl.wavesoftware.examples.wildflyswarm.view;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import pl.wavesoftware.examples.wildflyswarm.service.HelloService;
+import pl.wavesoftware.examples.wildflyswarm.service.api.HelloService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
