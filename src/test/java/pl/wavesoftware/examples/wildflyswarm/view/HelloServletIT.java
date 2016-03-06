@@ -16,7 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HelloServletIT {
 
     @ClassRule
-    public static Gasper gasper = Gasper.defaultForWildflySwarm().create();
+    public static Gasper gasper = Gasper.configurations()
+        .wildflySwarm()
+        .withTestApplicationLoggingOnConsole()
+        .build();
 
     @Test
     public void testGetRoot() throws UnirestException {
