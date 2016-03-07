@@ -1,8 +1,9 @@
 package pl.wavesoftware.examples.wildflyswarm.view;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import pl.wavesoftware.examples.wildflyswarm.service.api.DefaultImpl;
 import pl.wavesoftware.examples.wildflyswarm.service.api.HelloService;
+import pl.wavesoftware.examples.wildflyswarm.service.Hello;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -13,16 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static pl.wavesoftware.examples.wildflyswarm.service.Hello.Hellos.FUNNIER;
+
 /**
  * @author Krzysztof Suszynski <krzysztof.suszynski@coi.gov.pl>
  * @since 04.03.16
  */
 @WebServlet("/")
 @Slf4j
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class HelloServlet extends HttpServlet {
 
-    private final HelloService service;
+    private final HelloService defaultImpl;
+    private final HelloService funnierImpl;
+
+    @Inject
+    public HelloServlet(@Hello(FUNNIER) HelloService funnierImpl, @DefaultImpl HelloService defaultImpl) {
+        this.defaultImpl = defaultImpl;
+        this.funnierImpl = funnierImpl;
+    }
 
     @PostConstruct
     public void postConstruct() {
@@ -32,8 +41,9 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("A request for: " + request.getRequestURI());
-        String hello = service.makeHello();
+        String hello = defaultImpl.makeHello();
         log.info(String.format("Hello message: \"%s\"", hello));
         response.getWriter().append(hello);
+        log.info(String.format("Funnier version: \"%s\"", funnierImpl.makeHello()));
     }
 }
